@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JeanCat ($JEANCAT) — The Cat Who Groks</title>
+<meta name="description" content="JeanCat ($JEANCAT) — the ginger kitten who put on the beanie and understood everything. A Solana memecoin launched on pump.fun.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="JeanCat ($JEANCAT)">
+<meta property="og:description" content="The cat who groks. Solana memecoin, launched on pump.fun.">
+<meta property="og:image" content="grokcat.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;
+  --side:#0a0a0a;
+  --surface:#141414;
+  --surface-2:#1c1c1c;
+  --surface-3:#262626;
+  --border:#262626;
+  --border-soft:#1d1d1d;
+  --text:#f4f4f5;
+  --muted:#8e8e93;
+  --dim:#5a5a5e;
+  --ginger:#f2a65a;
+  --ginger-soft:rgba(242,166,90,.12);
+  --radius:22px;
+  --mono:"Geist Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:"Geist",system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--ginger);color:#000}
+
+/* ---------- layout ---------- */
+.app{display:flex;min-height:100vh}
+.sidebar{
+  position:fixed;inset:0 auto 0 0;width:260px;z-index:40;
+  background:var(--side);border-right:1px solid var(--border-soft);
+  display:flex;flex-direction:column;padding:14px 12px;
+  transition:transform .3s ease;
+}
+.main{flex:1;margin-left:260px;min-width:0}
+
+.brand{display:flex;align-items:center;gap:10px;padding:6px 8px 18px}
+.brand img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--border)}
+.brand b{font-weight:600;font-size:17px;letter-spacing:-.01em}
+.brand span{font-family:var(--mono);font-size:11px;color:var(--muted);display:block;line-height:1}
+
+.side-search{
+  display:flex;align-items:center;gap:8px;margin:0 2px 14px;
+  padding:9px 12px;border-radius:12px;background:var(--surface);
+  border:1px solid var(--border-soft);color:var(--dim);font-size:14px;
+}
+.side-label{font-size:12px;color:var(--dim);padding:10px 10px 6px;font-weight:500}
+.nav a{
+  display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:11px;
+  font-size:14.5px;color:#cfcfd3;transition:background .15s,color .15s;
+}
+.nav a:hover,.nav a.active{background:var(--surface-2);color:var(--text)}
+.nav svg{width:17px;height:17px;flex:none;opacity:.8}
+.side-foot{margin-top:auto;display:grid;gap:10px}
+.btn-buy{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 14px;border-radius:999px;background:var(--text);color:#000;
+  font-weight:600;font-size:14.5px;transition:transform .15s,background .15s;
+}
+.btn-buy:hover{background:#fff;transform:translateY(-1px)}
+.side-user{
+  display:flex;align-items:center;gap:10px;padding:8px;border-radius:12px;
+  border:1px solid var(--border-soft);
+}
+.side-user img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+.side-user small{display:block;color:var(--muted);font-size:12px;line-height:1.2}
+.side-user div{font-size:13.5px;line-height:1.3}
+
+/* topbar */
+.topbar{
+  position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;background:rgba(0,0,0,.72);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+.model-pill{
+  display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;
+  border:1px solid var(--border);font-size:14px;color:#d8d8dc;
+}
+.model-pill .dot{width:7px;height:7px;border-radius:50%;background:#3ddc84;box-shadow:0 0 10px #3ddc84}
+.top-actions{display:flex;gap:8px;align-items:center}
+.ghost{
+  padding:8px 14px;border-radius:999px;border:1px solid var(--border);font-size:14px;color:#d8d8dc;
+  transition:background .15s;
+}
+.ghost:hover{background:var(--surface-2)}
+.menu-btn{display:none;width:38px;height:38px;border-radius:10px;align-items:center;justify-content:center;border:1px solid var(--border)}
+
+/* ---------- hero / chat ---------- */
+.hero{
+  min-height:calc(100vh - 62px);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 20px 70px;position:relative;
+}
+.hero::before{
+  content:"";position:absolute;top:8%;left:50%;width:620px;height:620px;max-width:100vw;transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(242,166,90,.10),transparent 62%);pointer-events:none;
+}
+.hero-logo{
+  width:88px;height:88px;border-radius:50%;object-fit:cover;margin-bottom:22px;
+  border:1px solid var(--border);box-shadow:0 0 0 6px rgba(255,255,255,.02),0 20px 60px rgba(242,166,90,.18);
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-6px)}}
+.hero h1{
+  font-size:clamp(30px,5vw,44px);font-weight:500;letter-spacing:-.03em;line-height:1.15;
+  text-align:center;margin-bottom:8px;
+}
+.hero h1 em{font-style:normal;color:var(--ginger)}
+.hero .sub{color:var(--muted);text-align:center;margin-bottom:34px;font-size:16px}
+.ticker{font-family:var(--mono);color:var(--text);background:var(--surface-2);padding:2px 8px;border-radius:6px;font-size:14px}
+
+.chat-wrap{width:100%;max-width:760px;position:relative}
+.thread{display:flex;flex-direction:column;gap:22px;margin-bottom:22px}
+.thread:empty{display:none}
+
+.composer{
+  background:var(--surface);border:1px solid var(--border);border-radius:28px;
+  padding:14px 14px 12px 20px;transition:border-color .2s,box-shadow .2s;
+}
+.composer:focus-within{border-color:#3a3a3a;box-shadow:0 0 0 4px rgba(255,255,255,.03)}
+.composer textarea{
+  width:100%;resize:none;background:transparent;border:0;outline:0;color:var(--text);
+  font:inherit;font-size:16.5px;line-height:1.5;min-height:28px;max-height:160px;padding:4px 0 10px;
+}
+.composer textarea::placeholder{color:var(--dim)}
+.composer-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.tool{
+  display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;
+  border:1px solid var(--border);font-size:13.5px;color:#cfcfd3;transition:all .15s;
+}
+.tool:hover{background:var(--surface-2)}
+.tool.on{background:var(--ginger-soft);border-color:rgba(242,166,90,.4);color:var(--ginger)}
+.tool svg{width:15px;height:15px}
+.send{
+  width:38px;height:38px;border-radius:50%;background:var(--text);color:#000;
+  display:grid;place-items:center;flex:none;transition:opacity .15s,transform .15s;
+}
+.send:disabled{opacity:.25;cursor:default}
+.send:not(:disabled):hover{transform:scale(1.06)}
+.send svg{width:18px;height:18px}
+
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:18px}
+.chip{
+  padding:9px 15px;border-radius:999px;border:1px solid var(--border);
+  font-size:14px;color:#c6c6cb;background:transparent;transition:all .15s;
+}
+.chip:hover{background:var(--surface-2);color:var(--text)}
+
+.msg-user{
+  align-self:flex-end;max-width:80%;background:var(--surface-2);border:1px solid var(--border-soft);
+  padding:11px 17px;border-radius:22px 22px 6px 22px;font-size:15.5px;
+}
+.msg-bot{display:flex;gap:13px;align-items:flex-start}
+.msg-bot img{width:30px;height:30px;border-radius:50%;object-fit:cover;flex:none;margin-top:2px}
+.msg-bot .body{font-size:15.5px;color:#e4e4e7;min-width:0}
+.msg-bot .body p+p{margin-top:10px}
+.typing{display:inline-flex;gap:5px;padding:9px 0}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.think-tag{
+  display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);
+  margin-bottom:6px;font-family:var(--mono);
+}
+
+.disclaimer-mini{color:var(--dim);font-size:12.5px;text-align:center;margin-top:14px}
+
+/* ---------- sections as conversation ---------- */
+.convo{max-width:820px;margin:0 auto;padding:0 20px 40px}
+.block{padding:56px 0;border-top:1px solid var(--border-soft);scroll-margin-top:70px}
+.block .q{
+  margin-left:auto;width:fit-content;max-width:85%;background:var(--surface-2);border:1px solid var(--border-soft);
+  padding:11px 18px;border-radius:22px 22px 6px 22px;font-size:15.5px;margin-bottom:28px;
+}
+.answer{display:flex;gap:16px}
+.answer > img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
+.answer .content{flex:1;min-width:0}
+.meta{
+  display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-bottom:14px;
+}
+.meta .sep{color:var(--dim)}
+.content h2{font-size:clamp(24px,3.4vw,30px);font-weight:600;letter-spacing:-.025em;line-height:1.2;margin-bottom:16px}
+.content h3{font-size:17px;font-weight:600;margin:24px 0 8px;letter-spacing:-.01em}
+.content p{color:#d4d4d8;margin-bottom:14px}
+.content p strong{color:var(--text);font-weight:600}
+.hl{color:var(--ginger)}
+
+details.thoughts{
+  border:1px solid var(--border-soft);border-radius:14px;background:var(--side);margin-bottom:22px;
+}
+details.thoughts summary{
+  list-style:none;cursor:pointer;padding:11px 15px;font-size:13.5px;color:var(--muted);
+  display:flex;align-items:center;gap:8px;font-family:var(--mono);
+}
+details.thoughts summary::-webkit-details-marker{display:none}
+details.thoughts summary::after{content:"▾";margin-left:auto;transition:transform .2s}
+details.thoughts[open] summary::after{transform:rotate(180deg)}
+details.thoughts .t-body{
+  padding:0 15px 14px;color:var(--dim);font-size:14px;font-family:var(--mono);line-height:1.7;
+  border-top:1px solid var(--border-soft);padding-top:12px;
+}
+
+.story-img{
+  border-radius:20px;overflow:hidden;border:1px solid var(--border);margin:6px 0 24px;
+  position:relative;max-width:440px;
+}
+.story-img figcaption{
+  position:absolute;left:12px;bottom:12px;font-family:var(--mono);font-size:12px;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(8px);padding:5px 10px;border-radius:8px;color:#ddd;
+}
+.chapter{
+  border-left:2px solid var(--border);padding-left:18px;margin:22px 0;
+}
+.chapter .num{font-family:var(--mono);font-size:12px;color:var(--ginger);letter-spacing:.06em;margin-bottom:4px}
+.chapter h3{margin-top:0}
+
+/* token cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 18px}
+.card{
+  background:var(--surface);border:1px solid var(--border-soft);border-radius:18px;padding:18px;
+  transition:border-color .2s,transform .2s;
+}
+.card:hover{border-color:var(--border);transform:translateY(-2px)}
+.card .k{font-size:13px;color:var(--muted);margin-bottom:6px}
+.card .v{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.card .v.mono{font-family:var(--mono);font-size:19px}
+
+.bar{height:10px;border-radius:999px;background:var(--surface-2);overflow:hidden;display:flex;margin:6px 0 10px}
+.bar span{display:block;height:100%}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle}
+
+/* steps */
+.steps{display:grid;gap:10px;margin:6px 0 20px;counter-reset:s}
+.step{
+  display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--border-soft);
+  border-radius:18px;padding:16px 18px;
+}
+.step::before{
+  counter-increment:s;content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;background:var(--surface-3);font-family:var(--mono);font-size:13px;
+}
+.step b{display:block;font-weight:600;margin-bottom:2px}
+.step p{margin:0;font-size:14.5px;color:var(--muted)}
+
+/* roadmap */
+.road{display:grid;gap:0;margin:6px 0}
+.phase{display:grid;grid-template-columns:22px 1fr;gap:14px}
+.phase .rail{display:flex;flex-direction:column;align-items:center}
+.phase .rail i{width:12px;height:12px;border-radius:50%;border:2px solid var(--dim);margin-top:6px;background:var(--bg)}
+.phase.done .rail i{border-color:var(--ginger);background:var(--ginger)}
+.phase .rail::after{content:"";flex:1;width:2px;background:var(--border-soft);margin:4px 0}
+.phase:last-child .rail::after{display:none}
+.phase .pbody{padding-bottom:24px}
+.phase .tag{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.phase.done .tag{color:var(--ginger)}
+.phase h3{margin:2px 0 4px}
+.phase p{margin:0;font-size:14.5px;color:var(--muted)}
+
+/* faq */
+.faq{display:grid;gap:8px}
+.faq details{background:var(--surface);border:1px solid var(--border-soft);border-radius:16px}
+.faq summary{list-style:none;cursor:pointer;padding:15px 18px;font-weight:500;display:flex;gap:10px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";margin-left:auto;color:var(--muted);font-size:20px;line-height:1;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 18px 16px;margin:0;color:var(--muted);font-size:15px}
+
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.btn-line{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;
+  border:1px solid var(--border);font-size:14.5px;font-weight:500;transition:background .15s;
+}
+.btn-line:hover{background:var(--surface-2)}
+.btn-solid{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;
+  background:var(--text);color:#000;font-size:14.5px;font-weight:600;transition:transform .15s;
+}
+.btn-solid:hover{transform:translateY(-1px)}
+
+.reactions{display:flex;gap:4px;margin-top:18px;color:var(--dim)}
+.reactions button{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;transition:all .15s}
+.reactions button:hover{background:var(--surface-2);color:var(--text)}
+.reactions button.liked{color:var(--ginger)}
+.reactions svg{width:16px;height:16px}
+
+footer{
+  border-top:1px solid var(--border-soft);padding:36px 20px 44px;text-align:center;color:var(--dim);font-size:13px;
+}
+footer .f-brand{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--text);font-weight:600;margin-bottom:12px}
+footer .f-brand img{width:28px;height:28px;border-radius:50%}
+footer p{max-width:620px;margin:0 auto;line-height:1.65}
+
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);opacity:0;z-index:60;
+  background:var(--surface-2);border:1px solid var(--border);padding:10px 16px;border-radius:999px;font-size:14px;
+  transition:all .25s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.scrim{display:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:none}
+  .main{margin-left:0}
+  .menu-btn{display:inline-flex}
+  .scrim.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:35}
+  .top-actions .ghost{display:none}
+}
+@media (max-width:560px){
+  .topbar{padding:10px 16px}
+  .hero{padding:28px 16px 56px;min-height:calc(100svh - 58px)}
+  .convo{padding:0 16px 30px}
+  .answer{gap:12px}
+  .answer > img{width:28px;height:28px}
+  .tool .lbl{display:none}
+  .tool{padding:7px 10px}
+  .block{padding:44px 0}
+  .composer{padding:12px 12px 10px 16px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <a href="#top" class="brand">
+      <img src="logo.png" alt="JeanCat logo">
+      <div><b>JeanCat</b><span>$JEANCAT</span></div>
+    </a>
+
+    <div class="side-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      Search the litter box…
+    </div>
+
+    <nav class="nav">
+      <a href="#top" class="active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        New chat
+      </a>
+    </nav>
+    <div class="side-label">Today</div>
+    <nav class="nav" id="nav">
+      <a href="#story">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/></svg>
+        The Legend of Jean
+      </a>
+      <a href="#tokenomics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6.5 6.5"/></svg>
+        Tokenomics
+      </a>
+      <a href="#buy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h9.2a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
+        How to buy
+      </a>
+      <a href="#roadmap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg>
+        Purrmap
+      </a>
+      <a href="#faq">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        FAQ
+      </a>
+    </nav>
+
+    <div class="side-foot">
+      <a class="btn-buy" href="https://pump.fun" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        Buy on pump.fun
+      </a>
+      <div class="side-user">
+        <img src="favicon.png" alt="">
+        <div>Jean<small>9 lives remaining · Solana</small></div>
+      </div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ===== Main ===== -->
+  <main class="main" id="top">
+    <header class="topbar">
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        </button>
+        <div class="model-pill"><span class="dot"></span>JeanCat 1.0 <span style="color:var(--dim)">· beanie mode</span></div>
+      </div>
+      <div class="top-actions">
+        <a class="ghost" href="#story">Lore</a>
+        <a class="btn-solid" href="https://pump.fun" target="_blank" rel="noopener" style="padding:8px 16px;font-size:14px">Buy $JEANCAT</a>
+      </div>
+    </header>
+
+    <!-- Hero / chat -->
+    <section class="hero">
+      <img class="hero-logo" src="logo.png" alt="JeanCat wearing a beanie">
+      <h1>Good evening, degen.<br>What do you want to <em>grok</em>?</h1>
+      <p class="sub">I'm <b>JeanCat</b> <span class="ticker">$JEANCAT</span> — the kitten who put on the beanie and understood everything.</p>
+
+      <div class="chat-wrap">
+        <div class="thread" id="thread"></div>
+
+        <form class="composer" id="composer" autocomplete="off">
+          <textarea id="input" rows="1" placeholder="Ask JeanCat anything…" aria-label="Ask JeanCat"></textarea>
+          <div class="composer-row">
+            <div class="tools">
+              <button type="button" class="tool" data-mode="deep">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <span class="lbl">DeepPurr</span>
+              </button>
+              <button type="button" class="tool" data-mode="think">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+                <span class="lbl">Think</span>
+              </button>
+            </div>
+            <button type="submit" class="send" id="send" disabled aria-label="Send">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="chips" id="chips">
+          <button class="chip">Who is JeanCat?</button>
+          <button class="chip">Why the beanie?</button>
+          <button class="chip">How do I buy $JEANCAT?</button>
+          <button class="chip">Wen moon?</button>
+        </div>
+        <p class="disclaimer-mini">JeanCat can make mistakes. Mostly about where the red dot went.</p>
+      </div>
+    </section>
+
+    <!-- Conversation-style sections -->
+    <div class="convo">
+
+      <!-- STORY -->
+      <section class="block" id="story">
+        <div class="q">Tell me the story of JeanCat.</div>
+        <div class="answer">
+          <img src="favicon.png" alt="">
+          <div class="content">
+            <div class="meta">JeanCat 1.0 <span class="sep">·</span> thought for 9 lives</div>
+            <details class="thoughts">
+              <summary>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+                Thoughts
+              </summary>
+              <div class="t-body">
+                user wants origin story… recalling warm server racks… recalling a pile of denim… recalling the beanie… do not mention the incident with the ethernet cable… ok. ready. 🐾
+              </div>
+            </details>
+
+            <h2>The Legend of Jean, the cat who groks</h2>
+
+            <figure class="story-img">
+              <img src="logo.png" alt="Ginger kitten in a black GROK beanie" loading="lazy">
+              <figcaption>fig. 1 — the exact moment of enlightenment</figcaption>
+            </figure>
+
+            <div class="chapter">
+              <div class="num">CHAPTER 01</div>
+              <h3>A kitten in the server room</h3>
+              <p>Somewhere deep inside a giant datacenter, where a hundred thousand GPUs hum day and night, lived a tiny ginger stray. The racks were warm, the fans sounded like purring, and nobody ever turned the lights off. For a kitten with nowhere to go, it was <strong>paradise at 72°C</strong>.</p>
+            </div>
+
+            <div class="chapter">
+              <div class="num">CHAPTER 02</div>
+              <h3>Why "Jean"?</h3>
+              <p>The night-shift engineers had a habit: after 16-hour training runs, they'd change into clean clothes and toss their old jeans into a corner. That pile of denim became the kitten's bed. When they finally discovered the little furball snoozing on it, someone said <em>"look, it's a jean cat"</em> — and the name stuck. <strong>Jean</strong>.</p>
+            </div>
+
+            <div class="chapter">
+              <div class="num">CHAPTER 03</div>
+              <h3>The beanie</h3>
+              <p>One freezing morning, the lead engineer left their black <strong>GROK</strong> beanie on top of the hottest rack in the building — the one running the biggest model of all. For weeks it soaked up the heat of a trillion calculations. Jean, looking for the warmest spot in the world, crawled straight inside it.</p>
+              <p>When Jean poked his head back out, the beanie stayed on. And his eyes went <span class="hl">very, very wide</span>.</p>
+            </div>
+
+            <div class="chapter">
+              <div class="num">CHAPTER 04</div>
+              <h3>He understood. Everything.</h3>
+              <p>Every chart. Every candle. Every rug pulled and every rug that was <em>going</em> to be pulled. Why humans buy tops and sell bottoms. Why the red dot can never be caught. Jean didn't just read the data — <strong>Jean grokked it</strong>.</p>
+              <p>But Jean is still a cat. He can't type, he can't tweet, and he refuses to explain himself. All he does is stare at you with those enormous eyes that say: <em>"I know something you don't."</em></p>
+            </div>
+
+            <div class="chapter">
+              <div class="num">CHAPTER 05</div>
+              <h3>The launch</h3>
+              <p>So the engineers did the only reasonable thing. They let Jean walk across a keyboard on Solana. He landed on <strong>pump.fun</strong>, stepped on "Create coin", and <span class="ticker">$JEANCAT</span> was born — fair, open, no presale, no team bag. Just a kitten, a beanie, and an army of degens who finally have someone to tell them what's going on.</p>
+              <p style="color:var(--muted)">Jean still hasn't said a word. He doesn't need to. 🐾</p>
+            </div>
+
+            <div class="reactions">
+              <button class="like" aria-label="Like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10v11M15 5.9 14 10h5.8a2 2 0 0 1 2 2.3l-1.4 7A2 2 0 0 1 18.4 21H7V10l4-8a3 3 0 0 1 4 3.9z"/></svg></button>
+              <button class="copy" data-copy="JeanCat ($JEANCAT) — the cat who groks. Launched on pump.fun." aria-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOKENOMICS -->
+      <section class="block" id="tokenomics">
+        <div class="q">Break down the $JEANCAT tokenomics.</div>
+        <div class="answer">
+          <img src="favicon.png" alt="">
+          <div class="content">
+            <div class="meta">JeanCat 1.0 <span class="sep">·</span> DeepPurr <span class="sep">·</span> 4 sources</div>
+            <h2>Simple. Fair. Cat-approved.</h2>
+            <p>$JEANCAT launched on <strong>pump.fun</strong>, so everyone got the same chance at the same time. No insiders, no VCs, no hidden wallets under the couch.</p>
+
+            <div class="grid">
+              <div class="card"><div class="k">Name</div><div class="v">JeanCat</div></div>
+              <div class="card"><div class="k">Ticker</div><div class="v mono">$JEANCAT</div></div>
+              <div class="card"><div class="k">Chain</div><div class="v">Solana</div></div>
+              <div class="card"><div class="k">Total supply</div><div class="v mono">1,000,000,000</div></div>
+              <div class="card"><div class="k">Launch</div><div class="v">pump.fun</div></div>
+              <div class="card"><div class="k">Presale / team</div><div class="v">0% / 0%</div></div>
+            </div>
+
+            <h3>Distribution</h3>
+            <div class="bar"><span style="width:100%;background:linear-gradient(90deg,#f2a65a,#f4f4f5)"></span></div>
+            <div class="legend">
+              <span><i style="background:var(--ginger)"></i>100% fair launch via bonding curve</span>
+              <span><i style="background:var(--text)"></i>Liquidity migrates automatically on graduation</span>
+            </div>
+            <div class="reactions">
+              <button class="like" aria-label="Like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10v11M15 5.9 14 10h5.8a2 2 0 0 1 2 2.3l-1.4 7A2 2 0 0 1 18.4 21H7V10l4-8a3 3 0 0 1 4 3.9z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW TO BUY -->
+      <section class="block" id="buy">
+        <div class="q">How do I buy $JEANCAT?</div>
+        <div class="answer">
+          <img src="favicon.png" alt="">
+          <div class="content">
+            <div class="meta">JeanCat 1.0 <span class="sep">·</span> 4 steps</div>
+            <h2>Four steps to join the beanie gang</h2>
+            <div class="steps">
+              <div class="step"><div><b>Get a Solana wallet</b><p>Download Phantom or Solflare (app or browser extension) and save your seed phrase somewhere safe. Never share it with anyone — not even a cat.</p></div></div>
+              <div class="step"><div><b>Load up on SOL</b><p>Buy SOL on an exchange or directly in your wallet, then send it to your wallet address.</p></div></div>
+              <div class="step"><div><b>Go to pump.fun</b><p>Open pump.fun, connect your wallet and search for <span class="ticker">$JEANCAT</span>. Always double-check you've got the real JeanCat.</p></div></div>
+              <div class="step"><div><b>Swap SOL for $JEANCAT</b><p>Enter how much SOL you want to spend, confirm the transaction, and welcome to the litter. 🐾</p></div></div>
+            </div>
+            <div class="actions">
+              <a class="btn-solid" href="https://pump.fun" target="_blank" rel="noopener">Open pump.fun
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a class="btn-line" href="#faq">Read the FAQ</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROADMAP -->
+      <section class="block" id="roadmap">
+        <div class="q">What's the roadmap?</div>
+        <div class="answer">
+          <img src="favicon.png" alt="">
+          <div class="content">
+            <div class="meta">JeanCat 1.0 <span class="sep">·</span> Think</div>
+            <h2>The Purrmap</h2>
+            <div class="road">
+              <div class="phase done"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 1 · DONE</span><h3>Put on the beanie</h3><p>Jean achieves enlightenment. $JEANCAT launches fair on pump.fun.</p></div></div>
+              <div class="phase"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 2</span><h3>Graduate the curve</h3><p>Complete the bonding curve and migrate liquidity. The litter grows.</p></div></div>
+              <div class="phase"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 3</span><h3>Beanie season</h3><p>Memes, stickers and a whole timeline wearing tiny black beanies.</p></div></div>
+              <div class="phase"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 4</span><h3>Catch the red dot</h3><p>The final frontier. Nobody has ever done it. Jean thinks he knows how.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="block" id="faq">
+        <div class="q">Any quick FAQs?</div>
+        <div class="answer">
+          <img src="favicon.png" alt="">
+          <div class="content">
+            <div class="meta">JeanCat 1.0</div>
+            <h2>Frequently asked meows</h2>
+            <div class="faq">
+              <details><summary>What is $JEANCAT?</summary><p>A community memecoin on Solana, inspired by Jean — a ginger kitten who put on a GROK beanie and suddenly understood everything. It launched fair on pump.fun.</p></details>
+              <details><summary>Is there a team allocation or presale?</summary><p>No. pump.fun launches are fair: no presale, no team tokens, everyone buys from the same bonding curve.</p></details>
+              <details><summary>Where can I buy it?</summary><p>On pump.fun with a Solana wallet like Phantom or Solflare. See the "How to buy" section above.</p></details>
+              <details><summary>Does Jean actually talk?</summary><p>No. Jean stares. The staring is the alpha.</p></details>
+              <details><summary>Is this financial advice?</summary><p>Absolutely not. $JEANCAT is a meme with no intrinsic value or expectation of financial return. Only spend what you can afford to lose.</p></details>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="f-brand"><img src="favicon.png" alt="">JeanCat <span class="ticker">$JEANCAT</span></div>
+      <p>$JEANCAT is a memecoin created for entertainment purposes only. It has no intrinsic value, no formal team and no expectation of financial return. Crypto is highly volatile — do your own research. This project is a fan-made meme and is not affiliated with, endorsed by, or connected to xAI, Grok or any related company.</p>
+      <p style="margin-top:14px">© 2026 JeanCat · Made with 🧡 and a warm beanie.</p>
+    </footer>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const input = $('#input'), send = $('#send'), thread = $('#thread'), chips = $('#chips');
+  const modes = new Set();
+
+  /* auto-grow textarea */
+  const grow = () => { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 160) + 'px'; send.disabled = !input.value.trim(); };
+  input.addEventListener('input', grow);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('#composer').requestSubmit(); } });
+
+  document.querySelectorAll('.tool').forEach(b => b.addEventListener('click', () => {
+    b.classList.toggle('on');
+    modes.has(b.dataset.mode) ? modes.delete(b.dataset.mode) : modes.add(b.dataset.mode);
+  }));
+
+  /* scripted brain */
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const BUY = '<a href="#buy" style="text-decoration:underline">How to buy</a>';
+  const brain = [
+    [/who|what is|jean ?cat|about/i, [
+      "I'm Jean. A ginger kitten who grew up in a datacenter, slept on a pile of engineers' jeans, and crawled into an overheated GROK beanie. Now I grok everything. <b>$JEANCAT</b> is my coin on Solana. 🐾",
+      "Short version: tiny cat, warm beanie, infinite knowledge. Long version is <a href='#story' style='text-decoration:underline'>here</a>."
+    ]],
+    [/beanie|hat|grok/i, [
+      "The beanie sat on the hottest GPU rack for weeks, absorbing a trillion calculations. I climbed in for warmth. I came out understanding the universe. I'm not taking it off.",
+      "Without the beanie I'm just a cat. With the beanie I'm <i>still</i> just a cat — but I know what the chart does next."
+    ]],
+    [/buy|purchase|get|pump|how/i, [
+      `Grab a Solana wallet (Phantom / Solflare), add some SOL, head to <b>pump.fun</b> and search <b>$JEANCAT</b>. Full steps: ${BUY}.`,
+    ]],
+    [/moon|wen|price|pump it|100x|lambo/i, [
+      "*stares at you with enormous eyes for 11 seconds*",
+      "I grok everything, but I don't do price predictions. Cats don't give financial advice. We give judgmental looks.",
+      "Wen moon? Wen you stop asking and start memeing. 🌕"
+    ]],
+    [/\bca\b|contract|address/i, [
+      "Search <b>$JEANCAT</b> on pump.fun and always verify you've got the real one. Jean only trusts the bonding curve.",
+    ]],
+    [/team|dev|rug|safe/i, [
+      "Fair launch on pump.fun: no presale, no team bag. Just me, the beanie and the community. Still — DYOR, human.",
+    ]],
+    [/\b(hi|hello|hey|gm|sup)\b/i, ["gm. 🐾", "meow. what do you want to grok today?", "hello human. the beanie senses you."]],
+    [/red dot|laser/i, ["Phase 4 of the Purrmap. Classified. 🔴"]],
+    [/food|hungry|tuna|treat/i, ["Tuna is the only asset I hold besides $JEANCAT."]],
+  ];
+  const fallback = [
+    "Meow. (I grokked your question completely. The answer is simply too powerful for humans.)",
+    "Interesting. The beanie is processing… the beanie says: buy the dip, take a nap.",
+    "*knocks your question off the table*",
+    "I understand everything, but I'm also a cat, so I'm choosing not to answer that.",
+  ];
+  const reply = q => { for (const [re, a] of brain) if (re.test(q)) return pick(a); return pick(fallback); };
+
+  const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const ask = q => {
+    q = q.trim(); if (!q) return;
+    chips.style.display = 'none';
+    thread.insertAdjacentHTML('beforeend', `<div class="msg-user">${esc(q)}</div>`);
+    const bot = document.createElement('div');
+    bot.className = 'msg-bot';
+    const tag = modes.has('think') ? `<div class="think-tag">thinking with beanie…</div>` : modes.has('deep') ? `<div class="think-tag">DeepPurr · searching 9 lives…</div>` : '';
+    bot.innerHTML = `<img src="favicon.png" alt=""><div class="body">${tag}<span class="typing"><i></i><i></i><i></i></span></div>`;
+    thread.appendChild(bot);
+    input.value = ''; grow();
+    const delay = modes.size ? 1700 : 850;
+    setTimeout(() => {
+      const t = bot.querySelector('.think-tag');
+      if (t) t.textContent = modes.has('think') ? 'thought for 9 lives' : 'DeepPurr · 1 cat consulted';
+      bot.querySelector('.typing').outerHTML = `<p>${reply(q)}</p>`;
+    }, delay);
+    while (thread.children.length > 8) thread.firstElementChild.remove();
+  };
+  $('#composer').addEventListener('submit', e => { e.preventDefault(); ask(input.value); });
+  chips.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => ask(c.textContent)));
+
+  /* sidebar */
+  const sb = $('#sidebar'), scrim = $('#scrim');
+  const toggle = open => { sb.classList.toggle('open', open); scrim.classList.toggle('show', open); };
+  $('#menuBtn').addEventListener('click', () => toggle(true));
+  scrim.addEventListener('click', () => toggle(false));
+  sb.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+
+  /* active nav on scroll */
+  const links = [...document.querySelectorAll('.nav a')];
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('section.block').forEach(s => obs.observe(s));
+  window.addEventListener('scroll', () => { if (scrollY < 200) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#top')); }, { passive: true });
+
+  /* reactions + toast */
+  const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 1800); };
+  document.querySelectorAll('.like').forEach(b => b.addEventListener('click', () => { b.classList.toggle('liked'); toast(b.classList.contains('liked') ? 'Jean appreciates you 🐾' : 'Jean is disappointed'); }));
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); toast('Copied'); } catch { toast('Copy failed'); }
+  }));
+})();
+</script>
+</body>
+</html>
