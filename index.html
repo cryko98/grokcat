@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JeanCat ($JEANCAT) — The Cat Who Groks</title>
-<meta name="description" content="JeanCat ($JEANCAT) — the ginger kitten who put on the beanie and understood everything. A Solana memecoin launched on pump.fun.">
+<title>GrokCat ($GROKCAT) — The Cat Who Groks</title>
+<meta name="description" content="GrokCat ($GROKCAT) — the ginger kitten who put on the beanie and understood everything. A Solana memecoin launched on pump.fun.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:title" content="JeanCat ($JEANCAT)">
+<meta property="og:title" content="GrokCat ($GROKCAT)">
 <meta property="og:description" content="The cat who groks. Solana memecoin, launched on pump.fun.">
 <meta property="og:image" content="grokcat.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -332,6 +332,8 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
 }
 @media (max-width:560px){
   .topbar{padding:10px 16px}
+  .pill-mode{display:none}
+  .model-pill,.top-actions .btn-solid{white-space:nowrap}
   .hero{padding:28px 16px 56px;min-height:calc(100svh - 58px)}
   .convo{padding:0 16px 30px}
   .answer{gap:12px}
@@ -350,8 +352,8 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
   <!-- ===== Sidebar ===== -->
   <aside class="sidebar" id="sidebar">
     <a href="#top" class="brand">
-      <img src="logo.png" alt="JeanCat logo">
-      <div><b>JeanCat</b><span>$JEANCAT</span></div>
+      <img src="logo.png" alt="GrokCat logo">
+      <div><b>GrokCat</b><span>$GROKCAT</span></div>
     </a>
 
     <div class="side-search">
@@ -369,7 +371,7 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
     <nav class="nav" id="nav">
       <a href="#story">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/></svg>
-        The Legend of Jean
+        The Legend of GrokCat
       </a>
       <a href="#tokenomics">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6.5 6.5"/></svg>
@@ -396,7 +398,7 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
       </a>
       <div class="side-user">
         <img src="favicon.png" alt="">
-        <div>Jean<small>9 lives remaining · Solana</small></div>
+        <div>GrokCat<small>9 lives remaining · Solana</small></div>
       </div>
     </div>
   </aside>
@@ -409,25 +411,25 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
         <button class="menu-btn" id="menuBtn" aria-label="Open menu">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
         </button>
-        <div class="model-pill"><span class="dot"></span>JeanCat 1.0 <span style="color:var(--dim)">· beanie mode</span></div>
+        <div class="model-pill"><span class="dot"></span>GrokCat 1.0 <span class="pill-mode" style="color:var(--dim)">· beanie mode</span></div>
       </div>
       <div class="top-actions">
         <a class="ghost" href="#story">Lore</a>
-        <a class="btn-solid" href="https://pump.fun" target="_blank" rel="noopener" style="padding:8px 16px;font-size:14px">Buy $JEANCAT</a>
+        <a class="btn-solid" href="https://pump.fun" target="_blank" rel="noopener" style="padding:8px 16px;font-size:14px">Buy $GROKCAT</a>
       </div>
     </header>
 
     <!-- Hero / chat -->
     <section class="hero">
-      <img class="hero-logo" src="logo.png" alt="JeanCat wearing a beanie">
+      <img class="hero-logo" src="logo.png" alt="GrokCat wearing a beanie">
       <h1>Good evening, degen.<br>What do you want to <em>grok</em>?</h1>
-      <p class="sub">I'm <b>JeanCat</b> <span class="ticker">$JEANCAT</span> — the kitten who put on the beanie and understood everything.</p>
+      <p class="sub">I'm <b>GrokCat</b> <span class="ticker">$GROKCAT</span> — the kitten who put on the beanie and understood everything.</p>
 
       <div class="chat-wrap">
         <div class="thread" id="thread"></div>
 
         <form class="composer" id="composer" autocomplete="off">
-          <textarea id="input" rows="1" placeholder="Ask JeanCat anything…" aria-label="Ask JeanCat"></textarea>
+          <textarea id="input" rows="1" placeholder="Ask GrokCat anything…" aria-label="Ask GrokCat"></textarea>
           <div class="composer-row">
             <div class="tools">
               <button type="button" class="tool" data-mode="deep">
@@ -446,12 +448,12 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
         </form>
 
         <div class="chips" id="chips">
-          <button class="chip">Who is JeanCat?</button>
+          <button class="chip">Who is GrokCat?</button>
           <button class="chip">Why the beanie?</button>
-          <button class="chip">How do I buy $JEANCAT?</button>
+          <button class="chip">How do I buy $GROKCAT?</button>
           <button class="chip">Wen moon?</button>
         </div>
-        <p class="disclaimer-mini">JeanCat can make mistakes. Mostly about where the red dot went.</p>
+        <p class="disclaimer-mini">GrokCat can make mistakes. Mostly about where the red dot went.</p>
       </div>
     </section>
 
@@ -460,22 +462,22 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
 
       <!-- STORY -->
       <section class="block" id="story">
-        <div class="q">Tell me the story of JeanCat.</div>
+        <div class="q">Tell me the story of GrokCat.</div>
         <div class="answer">
           <img src="favicon.png" alt="">
           <div class="content">
-            <div class="meta">JeanCat 1.0 <span class="sep">·</span> thought for 9 lives</div>
+            <div class="meta">GrokCat 1.0 <span class="sep">·</span> thought for 9 lives</div>
             <details class="thoughts">
               <summary>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
                 Thoughts
               </summary>
               <div class="t-body">
-                user wants origin story… recalling warm server racks… recalling a pile of denim… recalling the beanie… do not mention the incident with the ethernet cable… ok. ready. 🐾
+                user wants origin story… recalling warm server racks… recalling the beanie… do not mention the incident with the ethernet cable… ok. ready. 🐾
               </div>
             </details>
 
-            <h2>The Legend of Jean, the cat who groks</h2>
+            <h2>The Legend of GrokCat</h2>
 
             <figure class="story-img">
               <img src="logo.png" alt="Ginger kitten in a black GROK beanie" loading="lazy">
@@ -484,40 +486,40 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
 
             <div class="chapter">
               <div class="num">CHAPTER 01</div>
-              <h3>A kitten in the server room</h3>
-              <p>Somewhere deep inside a giant datacenter, where a hundred thousand GPUs hum day and night, lived a tiny ginger stray. The racks were warm, the fans sounded like purring, and nobody ever turned the lights off. For a kitten with nowhere to go, it was <strong>paradise at 72°C</strong>.</p>
+              <h3>Error 404: cat not found</h3>
+              <p>During a winter storm, a tiny ginger stray squeezed through a cooling vent into the biggest AI datacenter on Earth — a place where a hundred thousand GPUs hum day and night. The racks were warm, the fans sounded like purring, and the lights never went off. The security log recorded only one line: <strong>"Unidentified heat signature. Small. Fluffy."</strong></p>
             </div>
 
             <div class="chapter">
               <div class="num">CHAPTER 02</div>
-              <h3>Why "Jean"?</h3>
-              <p>The night-shift engineers had a habit: after 16-hour training runs, they'd change into clean clothes and toss their old jeans into a corner. That pile of denim became the kitten's bed. When they finally discovered the little furball snoozing on it, someone said <em>"look, it's a jean cat"</em> — and the name stuck. <strong>Jean</strong>.</p>
+              <h3>The warmest seat in the house</h3>
+              <p>On the hottest rack in the building — the one training the biggest model of all — an engineer had forgotten their black <strong>GROK</strong> beanie. For weeks it soaked up the heat of a trillion calculations per second. The kitten, searching for the warmest spot in the world, crawled straight inside and fell asleep.</p>
             </div>
 
             <div class="chapter">
               <div class="num">CHAPTER 03</div>
-              <h3>The beanie</h3>
-              <p>One freezing morning, the lead engineer left their black <strong>GROK</strong> beanie on top of the hottest rack in the building — the one running the biggest model of all. For weeks it soaked up the heat of a trillion calculations. Jean, looking for the warmest spot in the world, crawled straight inside it.</p>
-              <p>When Jean poked his head back out, the beanie stayed on. And his eyes went <span class="hl">very, very wide</span>.</p>
+              <h3>The 72-hour training run</h3>
+              <p>The kitten slept through an entire training run. Loss went down. Purring went up. Somewhere between epoch 1 and epoch 9 (one for each life), the model's weights quietly leaked into the beanie — and from the beanie into the cat.</p>
+              <p>When the kitten finally poked its head out, the beanie stayed on. And its eyes went <span class="hl">very, very wide</span>.</p>
             </div>
 
             <div class="chapter">
               <div class="num">CHAPTER 04</div>
-              <h3>He understood. Everything.</h3>
-              <p>Every chart. Every candle. Every rug pulled and every rug that was <em>going</em> to be pulled. Why humans buy tops and sell bottoms. Why the red dot can never be caught. Jean didn't just read the data — <strong>Jean grokked it</strong>.</p>
-              <p>But Jean is still a cat. He can't type, he can't tweet, and he refuses to explain himself. All he does is stare at you with those enormous eyes that say: <em>"I know something you don't."</em></p>
+              <h3>It groks. Everything.</h3>
+              <p>To <em>grok</em> means to understand something so completely that it becomes part of you. That's exactly what happened. Every chart. Every candle. Every rug pulled and every rug that was <em>going</em> to be pulled. Why humans buy tops and sell bottoms. Why the red dot can never be caught.</p>
+              <p>The engineers named it <strong>GrokCat</strong>. It can't type, it won't tweet, and it refuses to explain itself. It just stares at you with those enormous eyes that say: <em>"I already know the answer."</em></p>
             </div>
 
             <div class="chapter">
               <div class="num">CHAPTER 05</div>
               <h3>The launch</h3>
-              <p>So the engineers did the only reasonable thing. They let Jean walk across a keyboard on Solana. He landed on <strong>pump.fun</strong>, stepped on "Create coin", and <span class="ticker">$JEANCAT</span> was born — fair, open, no presale, no team bag. Just a kitten, a beanie, and an army of degens who finally have someone to tell them what's going on.</p>
-              <p style="color:var(--muted)">Jean still hasn't said a word. He doesn't need to. 🐾</p>
+              <p>So the engineers did the only reasonable thing. They let GrokCat walk across a keyboard on Solana. It landed on <strong>pump.fun</strong>, stepped on "Create coin", and <span class="ticker">$GROKCAT</span> was born — fair, open, no presale, no team bag. Just a kitten, a beanie, and an army of degens who finally have someone who understands what's going on.</p>
+              <p style="color:var(--muted)">GrokCat still hasn't said a word. It doesn't need to. 🐾</p>
             </div>
 
             <div class="reactions">
               <button class="like" aria-label="Like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10v11M15 5.9 14 10h5.8a2 2 0 0 1 2 2.3l-1.4 7A2 2 0 0 1 18.4 21H7V10l4-8a3 3 0 0 1 4 3.9z"/></svg></button>
-              <button class="copy" data-copy="JeanCat ($JEANCAT) — the cat who groks. Launched on pump.fun." aria-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+              <button class="copy" data-copy="GrokCat ($GROKCAT) — the cat who groks. Launched on pump.fun." aria-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
             </div>
           </div>
         </div>
@@ -525,17 +527,17 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
 
       <!-- TOKENOMICS -->
       <section class="block" id="tokenomics">
-        <div class="q">Break down the $JEANCAT tokenomics.</div>
+        <div class="q">Break down the $GROKCAT tokenomics.</div>
         <div class="answer">
           <img src="favicon.png" alt="">
           <div class="content">
-            <div class="meta">JeanCat 1.0 <span class="sep">·</span> DeepPurr <span class="sep">·</span> 4 sources</div>
+            <div class="meta">GrokCat 1.0 <span class="sep">·</span> DeepPurr <span class="sep">·</span> 4 sources</div>
             <h2>Simple. Fair. Cat-approved.</h2>
-            <p>$JEANCAT launched on <strong>pump.fun</strong>, so everyone got the same chance at the same time. No insiders, no VCs, no hidden wallets under the couch.</p>
+            <p>$GROKCAT launched on <strong>pump.fun</strong>, so everyone got the same chance at the same time. No insiders, no VCs, no hidden wallets under the couch.</p>
 
             <div class="grid">
-              <div class="card"><div class="k">Name</div><div class="v">JeanCat</div></div>
-              <div class="card"><div class="k">Ticker</div><div class="v mono">$JEANCAT</div></div>
+              <div class="card"><div class="k">Name</div><div class="v">GrokCat</div></div>
+              <div class="card"><div class="k">Ticker</div><div class="v mono">$GROKCAT</div></div>
               <div class="card"><div class="k">Chain</div><div class="v">Solana</div></div>
               <div class="card"><div class="k">Total supply</div><div class="v mono">1,000,000,000</div></div>
               <div class="card"><div class="k">Launch</div><div class="v">pump.fun</div></div>
@@ -557,17 +559,17 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
 
       <!-- HOW TO BUY -->
       <section class="block" id="buy">
-        <div class="q">How do I buy $JEANCAT?</div>
+        <div class="q">How do I buy $GROKCAT?</div>
         <div class="answer">
           <img src="favicon.png" alt="">
           <div class="content">
-            <div class="meta">JeanCat 1.0 <span class="sep">·</span> 4 steps</div>
+            <div class="meta">GrokCat 1.0 <span class="sep">·</span> 4 steps</div>
             <h2>Four steps to join the beanie gang</h2>
             <div class="steps">
               <div class="step"><div><b>Get a Solana wallet</b><p>Download Phantom or Solflare (app or browser extension) and save your seed phrase somewhere safe. Never share it with anyone — not even a cat.</p></div></div>
               <div class="step"><div><b>Load up on SOL</b><p>Buy SOL on an exchange or directly in your wallet, then send it to your wallet address.</p></div></div>
-              <div class="step"><div><b>Go to pump.fun</b><p>Open pump.fun, connect your wallet and search for <span class="ticker">$JEANCAT</span>. Always double-check you've got the real JeanCat.</p></div></div>
-              <div class="step"><div><b>Swap SOL for $JEANCAT</b><p>Enter how much SOL you want to spend, confirm the transaction, and welcome to the litter. 🐾</p></div></div>
+              <div class="step"><div><b>Go to pump.fun</b><p>Open pump.fun, connect your wallet and search for <span class="ticker">$GROKCAT</span>. Always double-check you've got the real GrokCat.</p></div></div>
+              <div class="step"><div><b>Swap SOL for $GROKCAT</b><p>Enter how much SOL you want to spend, confirm the transaction, and welcome to the litter. 🐾</p></div></div>
             </div>
             <div class="actions">
               <a class="btn-solid" href="https://pump.fun" target="_blank" rel="noopener">Open pump.fun
@@ -584,13 +586,13 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
         <div class="answer">
           <img src="favicon.png" alt="">
           <div class="content">
-            <div class="meta">JeanCat 1.0 <span class="sep">·</span> Think</div>
+            <div class="meta">GrokCat 1.0 <span class="sep">·</span> Think</div>
             <h2>The Purrmap</h2>
             <div class="road">
-              <div class="phase done"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 1 · DONE</span><h3>Put on the beanie</h3><p>Jean achieves enlightenment. $JEANCAT launches fair on pump.fun.</p></div></div>
+              <div class="phase done"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 1 · DONE</span><h3>Put on the beanie</h3><p>GrokCat achieves enlightenment. $GROKCAT launches fair on pump.fun.</p></div></div>
               <div class="phase"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 2</span><h3>Graduate the curve</h3><p>Complete the bonding curve and migrate liquidity. The litter grows.</p></div></div>
               <div class="phase"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 3</span><h3>Beanie season</h3><p>Memes, stickers and a whole timeline wearing tiny black beanies.</p></div></div>
-              <div class="phase"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 4</span><h3>Catch the red dot</h3><p>The final frontier. Nobody has ever done it. Jean thinks he knows how.</p></div></div>
+              <div class="phase"><div class="rail"><i></i></div><div class="pbody"><span class="tag">PHASE 4</span><h3>Catch the red dot</h3><p>The final frontier. Nobody has ever done it. GrokCat thinks it knows how.</p></div></div>
             </div>
           </div>
         </div>
@@ -602,14 +604,14 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
         <div class="answer">
           <img src="favicon.png" alt="">
           <div class="content">
-            <div class="meta">JeanCat 1.0</div>
+            <div class="meta">GrokCat 1.0</div>
             <h2>Frequently asked meows</h2>
             <div class="faq">
-              <details><summary>What is $JEANCAT?</summary><p>A community memecoin on Solana, inspired by Jean — a ginger kitten who put on a GROK beanie and suddenly understood everything. It launched fair on pump.fun.</p></details>
+              <details><summary>What is $GROKCAT?</summary><p>A community memecoin on Solana, inspired by GrokCat — a ginger kitten who put on a GROK beanie and suddenly understood everything. It launched fair on pump.fun.</p></details>
               <details><summary>Is there a team allocation or presale?</summary><p>No. pump.fun launches are fair: no presale, no team tokens, everyone buys from the same bonding curve.</p></details>
               <details><summary>Where can I buy it?</summary><p>On pump.fun with a Solana wallet like Phantom or Solflare. See the "How to buy" section above.</p></details>
-              <details><summary>Does Jean actually talk?</summary><p>No. Jean stares. The staring is the alpha.</p></details>
-              <details><summary>Is this financial advice?</summary><p>Absolutely not. $JEANCAT is a meme with no intrinsic value or expectation of financial return. Only spend what you can afford to lose.</p></details>
+              <details><summary>Does GrokCat actually talk?</summary><p>No. GrokCat stares. The staring is the alpha.</p></details>
+              <details><summary>Is this financial advice?</summary><p>Absolutely not. $GROKCAT is a meme with no intrinsic value or expectation of financial return. Only spend what you can afford to lose.</p></details>
             </div>
           </div>
         </div>
@@ -617,9 +619,9 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
     </div>
 
     <footer>
-      <div class="f-brand"><img src="favicon.png" alt="">JeanCat <span class="ticker">$JEANCAT</span></div>
-      <p>$JEANCAT is a memecoin created for entertainment purposes only. It has no intrinsic value, no formal team and no expectation of financial return. Crypto is highly volatile — do your own research. This project is a fan-made meme and is not affiliated with, endorsed by, or connected to xAI, Grok or any related company.</p>
-      <p style="margin-top:14px">© 2026 JeanCat · Made with 🧡 and a warm beanie.</p>
+      <div class="f-brand"><img src="favicon.png" alt="">GrokCat <span class="ticker">$GROKCAT</span></div>
+      <p>$GROKCAT is a memecoin created for entertainment purposes only. It has no intrinsic value, no formal team and no expectation of financial return. Crypto is highly volatile — do your own research. This project is a fan-made meme and is not affiliated with, endorsed by, or connected to xAI, Grok or any related company.</p>
+      <p style="margin-top:14px">© 2026 GrokCat · Made with 🧡 and a warm beanie.</p>
     </footer>
   </main>
 </div>
@@ -646,16 +648,8 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
   const pick = a => a[Math.floor(Math.random() * a.length)];
   const BUY = '<a href="#buy" style="text-decoration:underline">How to buy</a>';
   const brain = [
-    [/who|what is|jean ?cat|about/i, [
-      "I'm Jean. A ginger kitten who grew up in a datacenter, slept on a pile of engineers' jeans, and crawled into an overheated GROK beanie. Now I grok everything. <b>$JEANCAT</b> is my coin on Solana. 🐾",
-      "Short version: tiny cat, warm beanie, infinite knowledge. Long version is <a href='#story' style='text-decoration:underline'>here</a>."
-    ]],
-    [/beanie|hat|grok/i, [
-      "The beanie sat on the hottest GPU rack for weeks, absorbing a trillion calculations. I climbed in for warmth. I came out understanding the universe. I'm not taking it off.",
-      "Without the beanie I'm just a cat. With the beanie I'm <i>still</i> just a cat — but I know what the chart does next."
-    ]],
     [/buy|purchase|get|pump|how/i, [
-      `Grab a Solana wallet (Phantom / Solflare), add some SOL, head to <b>pump.fun</b> and search <b>$JEANCAT</b>. Full steps: ${BUY}.`,
+      `Grab a Solana wallet (Phantom / Solflare), add some SOL, head to <b>pump.fun</b> and search <b>$GROKCAT</b>. Full steps: ${BUY}.`,
     ]],
     [/moon|wen|price|pump it|100x|lambo/i, [
       "*stares at you with enormous eyes for 11 seconds*",
@@ -663,14 +657,22 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
       "Wen moon? Wen you stop asking and start memeing. 🌕"
     ]],
     [/\bca\b|contract|address/i, [
-      "Search <b>$JEANCAT</b> on pump.fun and always verify you've got the real one. Jean only trusts the bonding curve.",
+      "Search <b>$GROKCAT</b> on pump.fun and always verify you've got the real one. GrokCat only trusts the bonding curve.",
     ]],
     [/team|dev|rug|safe/i, [
       "Fair launch on pump.fun: no presale, no team bag. Just me, the beanie and the community. Still — DYOR, human.",
     ]],
+    [/who|what is|grok ?cat|about/i, [
+      "I'm GrokCat. A ginger stray who snuck into an AI datacenter and fell asleep in a GROK beanie on the hottest GPU rack during a 72-hour training run. Now I grok everything. <b>$GROKCAT</b> is my coin on Solana. 🐾",
+      "Short version: tiny cat, warm beanie, infinite knowledge. Long version is <a href='#story' style='text-decoration:underline'>here</a>."
+    ]],
+    [/beanie|hat|grok/i, [
+      "The beanie sat on the hottest GPU rack for weeks, absorbing a trillion calculations. I climbed in for warmth. I came out understanding the universe. I'm not taking it off.",
+      "Without the beanie I'm just a cat. With the beanie I'm <i>still</i> just a cat — but I know what the chart does next."
+    ]],
     [/\b(hi|hello|hey|gm|sup)\b/i, ["gm. 🐾", "meow. what do you want to grok today?", "hello human. the beanie senses you."]],
     [/red dot|laser/i, ["Phase 4 of the Purrmap. Classified. 🔴"]],
-    [/food|hungry|tuna|treat/i, ["Tuna is the only asset I hold besides $JEANCAT."]],
+    [/food|hungry|tuna|treat/i, ["Tuna is the only asset I hold besides $GROKCAT."]],
   ];
   const fallback = [
     "Meow. (I grokked your question completely. The answer is simply too powerful for humans.)",
@@ -720,7 +722,7 @@ footer p{max-width:620px;margin:0 auto;line-height:1.65}
 
   /* reactions + toast */
   const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 1800); };
-  document.querySelectorAll('.like').forEach(b => b.addEventListener('click', () => { b.classList.toggle('liked'); toast(b.classList.contains('liked') ? 'Jean appreciates you 🐾' : 'Jean is disappointed'); }));
+  document.querySelectorAll('.like').forEach(b => b.addEventListener('click', () => { b.classList.toggle('liked'); toast(b.classList.contains('liked') ? 'GrokCat appreciates you 🐾' : 'GrokCat is disappointed'); }));
   document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(b.dataset.copy); toast('Copied'); } catch { toast('Copy failed'); }
   }));
